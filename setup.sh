@@ -55,5 +55,10 @@ echo "💻 VSCode設定..."
 ln -sf "$DOTFILES/vscode/settings.json" \
     "$HOME/Library/Application Support/Code/User/settings.json"
 
+echo "🔌 VSCode拡張機能インストール..."
+if command -v code &>/dev/null; then
+  cat "$DOTFILES/vscode/extensions.txt" | xargs -I {} code --install-extension {}
+fi
+
 echo "✅ セットアップ完了！"
 echo "👉 ターミナル再起動してな！"
