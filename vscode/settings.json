@@ -5,5 +5,4 @@
     "terminal.integrated.stickyScroll.enabled": false,
     "workbench.activityBar.compact": true,
     "workbench.startupEditor": "none",
-    "terminal.integrated.mouseWheelScrollSensitivity": 3
 }
