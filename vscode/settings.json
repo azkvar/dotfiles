@@ -5,4 +5,8 @@
     "terminal.integrated.stickyScroll.enabled": false,
     "workbench.activityBar.compact": true,
     "workbench.startupEditor": "none",
+    "[rust]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    }
 }

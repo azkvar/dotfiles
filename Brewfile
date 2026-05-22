@@ -20,7 +20,7 @@ brew "wget"
 brew "readline" #ruby依存
 brew "libyaml"  #ruby依存
 brew "gmp"      #ruby依存
-
+brew "awscli"  
 
 #GUI
 cask "ghostty"
@@ -31,3 +31,4 @@ cask "slack"
 cask "figma" 
 cask "font-jetbrains-mono-nerd-font"
 cask "font-jetbrains-mono"
+cask "intellij-idea-ce"
