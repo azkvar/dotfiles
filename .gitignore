@@ -1,6 +1,6 @@
-ssh/id_*
-ssh/*.pem
-ssh/known_hosts
+ssh/.ssh/id_*
+ssh/.ssh/*.pem
+ssh/.ssh/known_hosts
 
 .DS_Store
 

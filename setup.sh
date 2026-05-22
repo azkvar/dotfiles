@@ -40,7 +40,15 @@ ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 echo "🦀 Rust確認..."
 if ! command -v rustup &>/dev/null; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-fi  
+fi
+source "$HOME/.cargo/env"
+
+echo "🦀 Cargoツールインストール..."
+cargo install cargo-nextest --locked 2>/dev/null || true
+cargo install cargo-flamegraph 2>/dev/null || true
+cargo install cargo-criterion 2>/dev/null || true
+cargo install bacon --locked 2>/dev/null || true
+cargo install cargo-expand 2>/dev/null || true
 
 echo "🤖 Claude Code確認..."
 if ! command -v claude &>/dev/null; then
@@ -54,10 +62,17 @@ mise install
 
 echo "🔗 シンボリックリンク作成..."
 cd "$DOTFILES"
-[ -f "$HOME/.zshrc" ] && rm "$HOME/.zshrc"
-[ -f "$HOME/.gitconfig" ] && rm "$HOME/.gitconfig"
+[ -L "$HOME/.zshrc" ] && rm "$HOME/.zshrc"
+[ -L "$HOME/.gitconfig" ] && rm "$HOME/.gitconfig"
+[ -L "$HOME/.tmux.conf" ] && rm "$HOME/.tmux.conf"
+[ -L "$HOME/.ssh/config" ] && rm "$HOME/.ssh/config"
 
-stow zsh git mise ghostty
+mkdir -p "$HOME/.ssh"
+chmod 700 "$HOME/.ssh"
+
+stow -R zsh git mise ghostty tmux ssh
+
+chmod 600 "$HOME/.ssh/config"
 
 echo "💻 VSCode設定..."
 mkdir -p "$HOME/Library/Application Support/Code/User"
