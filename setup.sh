@@ -11,6 +11,9 @@ xcode-select --install 2>/dev/null || true
 echo "🍺 Homebrew確認..."
 if ! command -v brew &>/dev/null; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+    echo >> "$HOME/.zprofile"
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv zsh)"' >> "$HOME/.zprofile"
 fi
 brew bundle --file="$DOTFILES/Brewfile"
 
@@ -45,13 +48,19 @@ if ! command -v claude &>/dev/null; then
 fi
 
 echo "🔧 mise言語インストール..."
+export PATH="$HOME/.local/bin:$PATH"
+eval "$(mise activate bash)"
 mise install
 
 echo "🔗 シンボリックリンク作成..."
 cd "$DOTFILES"
+[ -f "$HOME/.zshrc" ] && rm "$HOME/.zshrc"
+[ -f "$HOME/.gitconfig" ] && rm "$HOME/.gitconfig"
+
 stow zsh git mise ghostty
 
 echo "💻 VSCode設定..."
+mkdir -p "$HOME/Library/Application Support/Code/User"
 ln -sf "$DOTFILES/vscode/settings.json" \
     "$HOME/Library/Application Support/Code/User/settings.json"
 

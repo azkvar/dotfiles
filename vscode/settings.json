@@ -4,5 +4,6 @@
     "editor.minimap.enabled": false,
     "terminal.integrated.stickyScroll.enabled": false,
     "workbench.activityBar.compact": true,
-    "workbench.startupEditor": "none"
+    "workbench.startupEditor": "none",
+    "terminal.integrated.mouseWheelScrollSensitivity": 3
 }
