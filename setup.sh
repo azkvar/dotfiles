@@ -70,6 +70,7 @@ backup_if_real_file() {
 backup_if_real_file ~/.ssh/config
 backup_if_real_file ~/.zshrc
 backup_if_real_file ~/.zprofile
+backup_if_real_file ~/.claude/CLAUDE.md
 
 cd "$DOTFILES"
 
@@ -93,6 +94,10 @@ echo "🔌 VSCode拡張機能インストール..."
 if command -v code &>/dev/null; then
     xargs -I {} code --install-extension {} < "$DOTFILES/vscode/extensions.txt"
 fi
+
+echo "🤖 Claude Code設定..."
+mkdir -p "$HOME/.claude"
+ln -sf "$DOTFILES/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 echo "✅ セットアップ完了！"
 echo "👉 ターミナル再起動してな！"
