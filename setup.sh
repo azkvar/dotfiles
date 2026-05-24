@@ -59,6 +59,11 @@ if ! command -v claude &>/dev/null; then
     curl -fsSL https://claude.ai/install.sh | bash
 fi
 
+echo "🤖 Codex確認..."
+if ! command -v codex &>/dev/null; then
+    curl -fsSL https://chatgpt.com/codex/install.sh | sh
+fi
+
 echo "🔗 シンボリックリンク作成..."
 backup_if_real_file() {
     local target="$1"
@@ -71,6 +76,7 @@ backup_if_real_file ~/.ssh/config
 backup_if_real_file ~/.zshrc
 backup_if_real_file ~/.zprofile
 backup_if_real_file ~/.claude/CLAUDE.md
+backup_if_real_file ~/.codex/AGENTS.md
 
 cd "$DOTFILES"
 
@@ -98,6 +104,10 @@ fi
 echo "🤖 Claude Code設定..."
 mkdir -p "$HOME/.claude"
 ln -sf "$DOTFILES/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+
+echo "🤖 Codex設定..."
+mkdir -p "$HOME/.codex"
+ln -sf "$DOTFILES/.codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
 
 echo "✅ セットアップ完了！"
 echo "👉 ターミナル再起動してな！"
