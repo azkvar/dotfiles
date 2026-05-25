@@ -1,5 +1,0 @@
-anthropic.claude-code
-openai.chatgpt
-rust-lang.rust-analyzer
-tamasfe.even-better-toml
-vadimcn.vscode-lldb

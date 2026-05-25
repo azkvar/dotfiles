@@ -1,7 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
-
 ZSH_THEME="robbyrussell"
-
 plugins=(
     git
     fzf
@@ -9,26 +7,15 @@ plugins=(
     zsh-syntax-highlighting
     zsh-completions
 )
+source "$ZSH/oh-my-zsh.sh"
 
-source $ZSH/oh-my-zsh.sh
-
-#mise
 eval "$(mise activate zsh)"
-
-#Claude Code
 export PATH="$HOME/.local/bin:$PATH"
-
-#Go
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
-
-#Rust
 source "$HOME/.cargo/env"
 
-#zoxide
 eval "$(zoxide init zsh)"
-
-#fzf
 eval "$(fzf --zsh)"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 
@@ -45,4 +32,3 @@ alias gl='git pull'
 alias lg='lazygit'
 alias vi='nvim'
 alias vim='nvim'
-alias vscode-sync='code --list-extensions > ~/.dotfiles/vscode/extensions.txt && echo "✅ extensions.txt更新したで!!"'

@@ -1,7 +1,3 @@
-ssh/.ssh/id_*
-ssh/.ssh/*.pem
-ssh/.ssh/known_hosts
-
 .DS_Store
 
 .env

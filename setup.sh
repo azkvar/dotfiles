@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 DOTFILES="$HOME/.dotfiles"
 
@@ -30,76 +30,34 @@ fi
 echo "🔌 oh-my-zshプラグイン確認..."
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
-[ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ] && \
-    git clone https://github.com/zsh-users/zsh-autosuggestions \
-    $ZSH_CUSTOM/plugins/zsh-autosuggestions || true
-
-[ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ] && \
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting \
-    $ZSH_CUSTOM/plugins/zsh-syntax-highlighting || true
-
-[ ! -d "$ZSH_CUSTOM/plugins/zsh-completions" ] && \
-    git clone https://github.com/zsh-users/zsh-completions \
-    $ZSH_CUSTOM/plugins/zsh-completions || true
-
-echo "🦀 Rust確認..."
-if ! command -v rustup &>/dev/null; then
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-fi
-source "$HOME/.cargo/env"
-
-echo "🦀 Cargoツールインストール..."
-if ! command -v cargo-binstall &>/dev/null; then
-  curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-fi
-cargo binstall -y cargo-nextest flamegraph cargo-criterion bacon cargo-expand || true
-
-echo "🤖 Claude Code確認..."
-if ! command -v claude &>/dev/null; then
-    curl -fsSL https://claude.ai/install.sh | bash
-fi
-
-echo "🤖 Codex確認..."
-if ! command -v codex &>/dev/null; then
-    curl -fsSL https://chatgpt.com/codex/install.sh | sh
-fi
+for plugin in zsh-autosuggestions zsh-syntax-highlighting zsh-completions; do
+    dir="$ZSH_CUSTOM/plugins/$plugin"
+    if [ ! -d "$dir" ]; then
+        git clone "https://github.com/zsh-users/$plugin" "$dir" || true
+    fi
+done
 
 echo "🔗 シンボリックリンク作成..."
-backup_if_real_file() {
+backup_if_real_path() {
     local target="$1"
-    if [ -f "$target" ] && [ ! -L "$target" ]; then
-        mv "$target" "${target}.bak"
+    if [ -L "$target" ] || [ ! -e "$target" ]; then
+        return
     fi
+    mv "$target" "${target}.bak"
 }
 
-backup_if_real_file ~/.ssh/config
-backup_if_real_file ~/.zshrc
-backup_if_real_file ~/.zprofile
-backup_if_real_file ~/.claude/CLAUDE.md
-backup_if_real_file ~/.codex/AGENTS.md
+backup_if_real_path ~/.zshrc
+backup_if_real_path ~/.zprofile
+backup_if_real_path ~/.gitconfig
+backup_if_real_path ~/.tmux.conf
+backup_if_real_path ~/.config/ghostty
+backup_if_real_path ~/.config/nvim
+backup_if_real_path ~/.claude/CLAUDE.md
+backup_if_real_path ~/.codex/AGENTS.md
 
 cd "$DOTFILES"
 
-mkdir -p "$HOME/.ssh"
-chmod 700 "$HOME/.ssh"
-
-stow -R zsh git mise ghostty tmux ssh
-
-chmod 600 "$HOME/.ssh/config" 2>/dev/null || true
-
-echo "🔧 mise言語インストール..."
-eval "$(/opt/homebrew/bin/mise activate bash)"
-mise install
-
-echo "💻 VSCode設定..."
-mkdir -p "$HOME/Library/Application Support/Code/User"
-ln -sf "$DOTFILES/vscode/settings.json" \
-    "$HOME/Library/Application Support/Code/User/settings.json"
-
-echo "🔌 VSCode拡張機能インストール..."
-if command -v code &>/dev/null; then
-    xargs -I {} code --install-extension {} < "$DOTFILES/vscode/extensions.txt"
-fi
+stow -R zsh git ghostty tmux nvim
 
 echo "🤖 Claude Code設定..."
 mkdir -p "$HOME/.claude"
@@ -107,7 +65,7 @@ ln -sf "$DOTFILES/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 
 echo "🤖 Codex設定..."
 mkdir -p "$HOME/.codex"
-ln -sf "$DOTFILES/.codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
+ln -sf "$DOTFILES/claude/CLAUDE.md" "$HOME/.codex/AGENTS.md"
 
 echo "✅ セットアップ完了！"
-echo "👉 ターミナル再起動してな！"
+echo "👉 ターミナル再起動して！"
