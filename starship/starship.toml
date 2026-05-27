@@ -1,0 +1,41 @@
+add_newline = false
+format = "$directory$git_branch$character"
+
+palette = "sumiyuki"
+
+[palettes.sumiyuki]
+blue = "#89b4fa"
+green = "#a6e3a1"
+peach = "#fab387"
+red = "#f38ba8"
+mauve = "#cba6f7"
+
+[directory]
+style = "bold blue"
+read_only = " ro"
+truncation_length = 3
+truncate_to_repo = false
+fish_style_pwd_dir_length = 1
+format = "[$path]($style)[$read_only]($style) "
+
+[git_branch]
+symbol = "git:"
+style = "mauve"
+format = "[$symbol$branch]($style) "
+
+[character]
+success_symbol = "[>](bold green)"
+error_symbol = "[>](bold red)"
+vimcmd_symbol = "[<](bold green)"
+
+[package]
+disabled = true
+
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[docker_context]
+disabled = true

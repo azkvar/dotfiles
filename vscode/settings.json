@@ -1,0 +1,19 @@
+{
+    "editor.fontSize": 15,
+    "editor.fontFamily": "JetBrainsMono Nerd Font Mono",
+    "editor.minimap.enabled": false,
+    "terminal.integrated.stickyScroll.enabled": false,
+    "workbench.activityBar.compact": true,
+    "workbench.startupEditor": "none",
+    "zenMode.fullScreen": false,
+    "zenMode.hideLineNumbers": false,
+    "zenMode.centerLayout": false,
+    "[rust]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+    "rust-analyzer.check.command": "clippy",
+    "github.copilot.enable": {
+        "*": false
+    }
+}
