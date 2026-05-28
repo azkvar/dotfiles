@@ -1,4 +1,7 @@
 {
+  "agent": {
+    "dock": "right",
+  },
   "agent_servers": {
     "claude-acp": {
       "type": "registry",
