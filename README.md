@@ -23,3 +23,8 @@ Existing files are backed up with a `.bak` suffix before linking.
 ```bash
 ./unlink.sh
 ```
+
+## .zshrc運用
+
+- 共通設定 `~/.zshrc`
+- 個々の設定 `~/.zshrc.local`

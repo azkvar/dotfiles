@@ -44,20 +44,6 @@ alias g='git'
 alias gs='git status'
 alias gp='git push'
 alias gl='git pull'
-alias lg='lazygit'
-
-alias vscode-exts='code --list-extensions > "$DOTFILES/vscode/extensions.txt"'
-
-alias gob='go build ./...'
-alias got='go test ./...'
-alias gom='go mod tidy'
-alias gor='go run .'
-
-alias cb='cargo build'
-alias cc='cargo clippy --all-targets --all-features'
-alias cf='cargo fmt'
-alias cr='cargo run'
-alias ct='cargo test'
 
 if command -v starship &>/dev/null; then
     eval "$(starship init zsh)"

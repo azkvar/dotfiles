@@ -13,12 +13,6 @@
 [interactive]
     diffFilter = delta --color-only
 
-[alias]
-    st = status
-    co = checkout
-    br = branch
-    lg = log --oneline --graph --decorate --all
-
 [init]
     defaultBranch = main
 
