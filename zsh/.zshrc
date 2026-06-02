@@ -3,7 +3,7 @@ fpath=("/opt/homebrew/share/zsh-completions" $fpath)
 autoload -Uz compinit
 compinit
 
-source "/opt/homebrew/share/fzf-tab/fzf-tab.plugin.zsh"
+source "/opt/homebrew/share/fzf-tab/fzf-tab.zsh"
 source "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 eval "$(mise activate zsh)"
