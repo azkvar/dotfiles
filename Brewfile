@@ -22,7 +22,5 @@ cask "zed"
 cask "raycast"
 cask "google-chrome"
 cask "docker-desktop"
-cask "codex"
-cask "codex-app"
 
 cask "font-jetbrains-mono-nerd-font"
