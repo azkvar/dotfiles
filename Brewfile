@@ -1,26 +1,20 @@
+tap "manaflow-ai/cmux"
+
+brew "fish"
+brew "mise"
 brew "starship"
-brew "zsh-autosuggestions"
-brew "zsh-syntax-highlighting"
-brew "zsh-completions"
-brew "fzf-tab"
 brew "fzf"
 brew "zoxide"
-
 brew "eza"
 brew "bat"
 brew "ripgrep"
 brew "fd"
 brew "jq"
 brew "git-delta"
-
 brew "git"
-brew "mise"
 brew "vim"
 
-cask "ghostty"
-cask "zed"
+cask "cmux"
 cask "raycast"
-cask "google-chrome"
-cask "docker-desktop"
-
+cask "zed"
 cask "font-jetbrains-mono-nerd-font"

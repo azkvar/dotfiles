@@ -1,5 +1,18 @@
 {
-  "format_on_save": "on",
-  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_font_family": "JetBrainsMonoNL Nerd Font Mono",
   "buffer_font_size": 17,
+  "buffer_font_features": {
+    "calt": false,
+  },
+  "format_on_save": "on",
+  "ensure_final_newline_on_save": true,
+  "remove_trailing_whitespace_on_save": true,
+  "terminal": {
+    "copy_on_select": true,
+  },
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry",
+    },
+  },
 }
