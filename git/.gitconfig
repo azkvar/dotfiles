@@ -16,6 +16,21 @@
 [init]
     defaultBranch = main
 
+[alias]
+    st = status --short --branch
+    sw = switch
+    swc = switch -c
+    br = branch
+    ci = commit
+    amend = commit --amend
+    last = log -1 --stat
+    lg = log --graph --decorate --oneline --all
+    spush = stash push
+    slist = stash list
+    spop = stash pop
+    unstage = restore --staged
+    als = config --get-regexp ^alias\\.
+
 [pull]
     rebase = true
 
