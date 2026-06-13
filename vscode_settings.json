@@ -1,0 +1,38 @@
+{
+  "editor.fontFamily": "JetBrainsMonoNL Nerd Font Mono",
+  "editor.fontSize": 16,
+  "editor.fontLigatures": false,
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": true,
+  "editor.renderWhitespace": "boundary",
+  "editor.stickyScroll.enabled": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "terminal.integrated.copyOnSelection": true,
+  "terminal.integrated.fontFamily": "JetBrainsMonoNL Nerd Font Mono",
+  "terminal.integrated.stickyScroll.enabled": false,
+  "update.showReleaseNotes": false,
+  "workbench.colorTheme": "Tokyo Night",
+  "workbench.startupEditor": "none",
+  "editor.minimap.enabled": false,
+  "workbench.activityBar.compact": true,
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "cva\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ],
+    [
+      "clsx\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ],
+    [
+      "cn\\(([^)]*)\\)",
+      "[\"'`]([^\"'`]*).*?[\"'`]"
+    ]
+  ],
+  "zenMode.centerLayout": false,
+  "zenMode.fullScreen": false,
+  "zenMode.hideActivityBar": true,
+  "zenMode.hideLineNumbers": false
+}

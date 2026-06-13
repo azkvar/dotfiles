@@ -1,0 +1,10 @@
+enkia.tokyo-night
+bradlc.vscode-tailwindcss
+dbaeumer.vscode-eslint
+esbenp.prettier-vscode
+golang.go
+ms-python.python
+ms-python.vscode-pylance
+redhat.java
+anthropic.claude-code
+MS-CEINTL.vscode-language-pack-ja

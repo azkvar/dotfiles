@@ -1,0 +1,29 @@
+[user]
+    name = yksm-dev
+    email = 285984494+azkvar@users.noreply.github.com
+
+[core]
+    pager = delta
+    excludesfile = ~/.gitignore_global
+
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+
+[interactive]
+    diffFilter = delta --color-only
+
+[init]
+    defaultBranch = main
+
+[alias]
+
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+
+[merge]
+    conflictstyle = zdiff3

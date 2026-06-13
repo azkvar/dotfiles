@@ -1,37 +1,46 @@
 #!/bin/bash
 set -euo pipefail
 
-brew bundle --file="Brewfile" --no-upgrade
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-mkdir -p "$HOME/.config/fish/conf.d" "$HOME/.config/fish/functions" "$HOME/.config/fish/completions"
+brew bundle --file="$DOTFILES_DIR/Brewfile" --no-upgrade
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+mkdir -p "$ZSH_CUSTOM/plugins"
+
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-completions" ]; then
+  git clone https://github.com/zsh-users/zsh-completions "$ZSH_CUSTOM/plugins/zsh-completions"
+fi
+
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+fi
+
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+fi
+
 mkdir -p "$HOME/.config/ghostty" "$HOME/.config/zed"
+mkdir -p "$HOME/Library/Application Support/Code/User"
 
-ln -sfn "$PWD/fish/config.fish" "$HOME/.config/fish/config.fish"
-for file in "$PWD"/fish/conf.d/*.fish; do
-  ln -sfn "$file" "$HOME/.config/fish/conf.d/$(basename "$file")"
-done
+ln -sfn "$DOTFILES_DIR/zshrc" "$HOME/.zshrc"
+ln -sfn "$DOTFILES_DIR/zprofile" "$HOME/.zprofile"
+ln -sfn "$DOTFILES_DIR/gitconfig" "$HOME/.gitconfig"
+ln -sfn "$DOTFILES_DIR/gitignore_global" "$HOME/.gitignore_global"
+ln -sfn "$DOTFILES_DIR/tmux.conf" "$HOME/.tmux.conf"
+ln -sfn "$DOTFILES_DIR/ghostty_config" "$HOME/.config/ghostty/config"
+ln -sfn "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
+ln -sfn "$DOTFILES_DIR/zed_settings.json" "$HOME/.config/zed/settings.json"
+ln -sfn "$DOTFILES_DIR/vscode_settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
 
-for file in "$PWD"/fish/functions/*.fish; do
-  [ -e "$file" ] && ln -sfn "$file" "$HOME/.config/fish/functions/$(basename "$file")"
-done
-
-for file in "$PWD"/fish/completions/*.fish; do
-  [ -e "$file" ] && ln -sfn "$file" "$HOME/.config/fish/completions/$(basename "$file")"
-done
-
-ln -sfn "$PWD/git/.gitconfig" "$HOME/.gitconfig"
-ln -sfn "$PWD/ghostty/config" "$HOME/.config/ghostty/config"
-ln -sfn "$PWD/starship/starship.toml" "$HOME/.config/starship.toml"
-ln -sfn "$PWD/zed/settings.json" "$HOME/.config/zed/settings.json"
-
-if ! grep -qx "$(command -v fish)" /etc/shells; then
-  command -v fish | sudo tee -a /etc/shells >/dev/null
-fi
-
-if [ "$(dscl . -read "/Users/$(id -un)" UserShell 2>/dev/null | awk '{print $2}')" != "$(command -v fish)" ]; then
-  chsh -s "$(command -v fish)"
-fi
-
-if [ -t 0 ] && [ "${DOTFILES_SKIP_EXEC_FISH:-}" != "1" ]; then
-  exec "$(command -v fish)"
+if command -v code >/dev/null; then
+  while IFS= read -r extension; do
+    [[ -z "$extension" || "$extension" == \#* ]] && continue
+    code --install-extension "$extension" >/dev/null
+  done < "$DOTFILES_DIR/vscode_extensions.txt"
 fi
